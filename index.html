@@ -271,6 +271,67 @@
             .carousel-btn { display: none; }
             .mods-carousel { cursor: default; }
         }
+
+                /* Стили для блока правил */
+        .rules-section {
+            padding: 0;
+            overflow: hidden;
+        }
+        .rules-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            cursor: pointer;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 0px #000;
+            list-style: none; /* Убираем стандартный маркер */
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.2s;
+        }
+        .rules-summary:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .rules-summary::-webkit-details-marker {
+            display: none;
+        }
+        .rules-arrow {
+            font-size: 1rem;
+            transition: transform 0.3s;
+            color: var(--accent);
+        }
+        details[open] .rules-arrow {
+            transform: rotate(180deg);
+        }
+        .rules-content {
+            padding: 0 32px 32px 32px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .rules-content h4 {
+            color: #fff;
+            margin: 24px 0 12px 0;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 0px #000;
+        }
+        .rules-content p {
+            margin-bottom: 12px;
+        }
+        .rules-content ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+        .rules-content li {
+            margin-bottom: 8px;
+        }
+        .rules-content strong {
+            color: #fff;
+        }
+        
     </style>
 </head>
 <body>
@@ -407,7 +468,45 @@
         <div id="twitchChatContainer" class="glass" style="display: none; padding: 16px;">
             <iframe id="twitchChatIframe" src="" frameborder="0" scrolling="no" allowfullscreen="true" style="width: 100%; height: 500px; border-radius: 12px; border: none;"></iframe>
         </div>
+        <!-- Правила сервера -->
+        <section class="glass rules-section">
+            <details>
+                <summary class="rules-summary">
+                    <span>📜 Правила нашего сервера</span>
+                    <span class="rules-arrow">▼</span>
+                </summary>
+                <div class="rules-content">
+                    <p><strong>У нас есть античит! 🛡️</strong></p>
+                    <p>На сервере установлен мощный античит (GrimAC) и продвинутая защита ядра. Он банит автоматически, без предупреждений и киков. Мы сразу говорим вам, что разрешено, а что запрещено, чтобы вы не теряли аккаунты по глупости.</p>
+                    
+                    <h4>🚫 1. Запрещенные читы (Мгновенный бан)</h4>
+                    <p>За использование этих программ вы будете забанены навсегда автоматически, без разбирательств:</p>
+                    <ul>
+                        <li><strong>Читы на движение:</strong> Fly (Полёт), Speed (Ускорение), Jesus (Ходьба по воде), Spider (Лазание по стенам), NoFall (Игнорирование урона от падения).</li>
+                        <li><strong>Боевые читы:</strong> KillAura (Автоудар), Reach (Удар с дистанции), Hitboxes (Увеличенные хитбоксы), AimBot (Автонаведение), Autoclicker.</li>
+                        <li><strong>Взлом клиента:</strong> Использование краш-эксплойтов, дюпов (копирование предметов), багов сервера и попыток обойти античит.</li>
+                    </ul>
 
+                    <h4>🕵️ 2. X-Ray (Просвечивание блоков) — РАЗРЕШЕН, НО НЕ РАБОТАЕТ</h4>
+                    <p>Мы не баним за X-Ray. Вы можете смело включать любые моды или ресурспаки, которые подсвечивают руды сквозь стены.</p>
+                    <p><strong>НО:</strong> На сервере включена максимальная защита ядра (Paper Anti-XRay). Вы просто не увидите реальных руд сквозь камень. Вместо алмазов вы будете видеть фейковые блоки. Тратить время на X-Ray бесполезно.</p>
+
+                    <h4>💥 3. Гриферство и Кражи — ЗАПРЕЩЕНЫ</h4>
+                    <p>Воровать ресурсы из чужих сундуков, взрывать базы и ломать чужие постройки — запрещено. За это администрация выдает бан на неопределенный срок (навсегда, до решения админа).</p>
+                    <p><strong>Но есть нюанс:</strong> У нас нет логгера блоков и сундуков (мы не видим, кто именно сломал блок или забрал алмазы).</p>
+                    <p>Это значит, что если вы украдете ресурсы или загриферите базу, и вас никто не увидит (и никто не пожалуется с доказательствами) — вам ничего не будет. Мы не узнаем об этом.</p>
+                    <p>Если же вас поймали с поличным, засняли на видео или на вас пожаловались — вы получите бан. Администрация не будет возвращать вещи пострадавшим, если виновник не найден.</p>
+
+                    <h4>⚠️ 4. Что делать, если вас забанило случайно?</h4>
+                    <p>Античит настроен очень жестко (бан на 3-е нарушение движения). Иногда из-за сильных лагов сервера или вашего интернета он может ошибиться.</p>
+                    <p>Если вас забанило, но вы не использовали читы на движение или боевку — напишите администрации в Discord (укажите ник и время бана). Если это была ошибка из-за лага, вам снимут бан.</p>
+                    <p>Но если вы летали или били с дистанции — бан не снимается.</p>
+
+                    <h4>🎙️ 5. Нарушение политики твича в войсе, спам в войс или обычный чат.</h4>
+                    <p>Хоть они и не приносят фактического урона серверу за произношение банвордов или радикальных мыслей (даже в шутку) Администрация все ровно имеет полное право лишить вас играть на этом сервере.</p>
+                </div>
+            </details>
+        </section>
         <!-- Техподдержка -->
         <footer class="support-footer">
             <a href="https://t.me/fevrent" target="_blank" class="support-link">
@@ -493,6 +592,22 @@
                 url: "https://cdn.modrinth.com/data/lfHFW1mp/versions/9cXz7rtH/journeymap-fabric-26.3-6.0.8.jar", 
                 modrinthUrl: "https://modrinth.com/mod/journeymap",
                 icon: "https://cdn.modrinth.com/data/lfHFW1mp/icon.png", 
+                recommended: false 
+            }
+                        { 
+                name: "Bobby", 
+                desc: "Позволяет видеть чанки за пределами прогрузки сервера, кэшируя их локально.", 
+                url: "https://modrinth.com/mod/bobby/versions?g=26.3&l=fabric", 
+                modrinthUrl: "https://modrinth.com/mod/bobby",
+                icon: "https://cdn.modrinth.com/data/M08ruV16/icon.png", 
+                recommended: false 
+            },
+            { 
+                name: "Flashback", 
+                desc: "Записывайте игровой процесс и воспроизводите его для создания кинематографичных кадров.", 
+                url: "https://modrinth.com/mod/flashback/versions?g=26.3&l=fabric", 
+                modrinthUrl: "https://modrinth.com/mod/flashback",
+                icon: "https://cdn.modrinth.com/data/4das1Fjq/icon.png", 
                 recommended: false 
             }
         ];

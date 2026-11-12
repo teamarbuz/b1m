@@ -47,60 +47,19 @@
         }
 
         .container { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-/* ===== Настоящее стекло iOS (Liquid Glass) ===== */
-.glass {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    padding: 32px;
-    border-radius: 28px; /* В iOS скругления довольно большие */
 
-    /* 1. Тонировка (Tint): легкий белый или темный налет, чтобы это было "материалом" */
-    background: rgba(255, 255, 255, 0.10);
+        /* Стекло */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px) saturate(130%);
+            -webkit-backdrop-filter: blur(8px) saturate(130%);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6), 6px 6px 0px rgba(0,0,0,0.5);
+            padding: 32px;
+        }
 
-    /* 2. Матовость (Frost): Размытие + высокая насыщенность (saturate) + яркость.
-       Именно saturate(180%) дает тот самый "сочный" эффект iOS, когда цвета 
-       под стеклом не сереют, а становятся ярче. */
-    backdrop-filter: blur(8px) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(8px) saturate(180%) brightness(1.1);
-
-    /* 3. Кромка (Specular rim): Имитация толщины стекла.
-       Свет падает сверху, поэтому верхняя грань самая яркая. */
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 
-        /* Внешняя мягкая тень (отрыв от поверхности) */
-        0 8px 32px rgba(0, 0, 0, 0.25),
-        /* Верхний блик (самый сильный) */
-        inset 0 1px 1px rgba(255, 255, 255, 0.55),
-        /* Нижний отраженный свет */
-        inset 0 -1px 1px rgba(255, 255, 255, 0.30),
-        /* Боковые грани */
-        inset 1px 0 1px rgba(255, 255, 255, 0.20),
-        inset -1px 0 1px rgba(255, 255, 255, 0.20);
-}
-
-/* 4. Глянцевый отблеск (Sheen): Диагональный блик, который делает поверхность "влажной" */
-.glass::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 1;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.12) 0%,
-        rgba(255, 255, 255, 0.06) 100%
-    );
-    mix-blend-mode: overlay; /* Смешивает блик с фоном, делая его реалистичным */
-}
-
-/* Fallback для браузеров без поддержки backdrop-filter */
-@supports not (backdrop-filter: blur(1px)) {
-    .glass {
-        background: rgba(30, 30, 35, 0.85);
-    }
-}
         /* Шапка */
         .header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
         .header-group { display: flex; align-items: center; gap: 20px; }
@@ -498,38 +457,38 @@
         // Фон с частицами
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 0, "density": { "enable": true, "value_area": 200 } },
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ffffff" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5, "random": false },
                 "size": { "value": 6, "random": true },
-                "line_linked": { "enable": true, "distance": 400, "color": "#ffffff", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "bounce", "bounce": false }
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 5, "direction": "none", "random": false, "straight": false, "out_mode": "bounce", "bounce": false }
             },
             "interactivity": {
                 "detect_on": "window",
                 "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 } }
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 0 } }
             },
             "retina_detect": true
         });
 
         // Моды (исправлена запятая перед Bobby)
         const mods = [
-              { 
+            { 
+                name: "Plasmo Voice", 
+                desc: "Добавляет возможность слышать и говорить с игроками.", 
+                url: "https://cdn.modrinth.com/data/1bZhdhsH/versions/vKP6gBRn/plasmovoice-fabric-26.3-2.1.17.jar", 
+                modrinthUrl: "https://modrinth.com/mod/plasmo-voice",
+                icon: "https://cdn.modrinth.com/data/1bZhdhsH/icon.png", 
+                recommended: true 
+            },
+            { 
                 name: "Fabric API", 
                 desc: "ОБЯЗАТЕЛЬНЫЙ мод-библиотека. Только с ним у вас запустятся другие моды. Сам по себе ничего не добовляет", 
                 url: "https://cdn.modrinth.com/data/P7rD8mSH/versions/vXP2b6pV/fabric-api-0.165.0%2B26.3.jar", 
                 modrinthUrl: "https://modrinth.com/mod/fabric-api",
                 icon: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.modrinth.com%2Fdata%2FP7dR8mSH%2Ficon.png&f=1&nofb=1&ipt=3d87913b447f30c2ce09484a702c065f2d05f527ae763020af14c8c82b32c22c&ipo=images", 
-                recommended: true 
-            },
-            { 
-                name: "Plasmo Voice", 
-                desc: "Голосовой чат. Позволяет вам общатся а также легче координироватся с другими игроками", 
-                url: "https://cdn.modrinth.com/data/1bZhdhsH/versions/vKP6gBRn/plasmovoice-fabric-26.3-2.1.17.jar", 
-                modrinthUrl: "https://modrinth.com/mod/plasmo-voice",
-                icon: "https://cdn.modrinth.com/data/1bZhdhsH/icon.png", 
                 recommended: true 
             },
             { 

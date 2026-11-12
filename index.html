@@ -421,7 +421,7 @@
                     <p>Но если вы летали или били с дистанции — бан не снимается.</p>
 
                     <h4>🎙️ 5. Нарушение политики твича в войсе, спам в войс или обычный чат.</h4>
-                    <p>Хоть они и не приносят фактического урона серверу за произношение банвордов или радикальных мыслей (даже в шутку) Администрация все ровно имеет полное право лишить вас играть на этом сервере.</p>
+                    <p>Хоть они и не приносят фактического урона серверу за произношение банвордов или радикальных мыслей (даже в шутку) Администрация <strong>все равно имеет полное право лишить вас возможности играть на этом сервере.:</strong></p>
                 </div>
             </details>
         </section>
@@ -429,11 +429,11 @@
         <!-- Чат -->
         <section class="glass twitch-footer">
             <div class="twitch-text">
-                <h3>Стримы по этому серверу</h3>
-                <p>Чаще всего b1m_chik проводит трансляции именно на Twitch.</p>
+                <h3>Стримы от создателя сервера Бима</h3></h3>
+                <p>b1m_chik проводит трансляции именно на Twitch.</p>
             </div>
             <div style="display: flex; gap: 12px;">
-                <a href="https://www.twitch.tv/b1m_chik" target="_blank" class="btn-primary">Перейти на канал</a>
+                <a href="https://www.twitch.tv/b1m_chik" target="_blank" class="btn-primary">Подпишись быстро</a>
                 <button onclick="toggleTwitchEmbed()" class="btn-secondary" id="twitchToggleBtn">Показать чат</button>
             </div>
         </section>
@@ -457,13 +457,13 @@
         // Фон с частицами
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 200, "density": { "enable": true, "value_area": 1600 } },
                 "color": { "value": "#ffffff" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5, "random": false },
-                "size": { "value": 3, "random": true },
+                "size": { "value": 6, "random": true },
                 "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "bounce", "bounce": false }
+                "move": { "enable": true, "speed": 5, "direction": "none", "random": false, "straight": false, "out_mode": "bounce", "bounce": false }
             },
             "interactivity": {
                 "detect_on": "window",
@@ -485,7 +485,7 @@
             },
             { 
                 name: "Fabric API", 
-                desc: "Обязательная база, без которой не запустится ни один мод ниже.", 
+                desc: "ОБЯЗАТЕЛЬНЫЙ мод-библиотека. Только с ним у вас запустятся другие моды. Сам по себе ничего не добовляет", 
                 url: "https://cdn.modrinth.com/data/P7rD8mSH/versions/vXP2b6pV/fabric-api-0.165.0%2B26.3.jar", 
                 modrinthUrl: "https://modrinth.com/mod/fabric-api",
                 icon: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.modrinth.com%2Fdata%2FP7dR8mSH%2Ficon.png&f=1&nofb=1&ipt=3d87913b447f30c2ce09484a702c065f2d05f527ae763020af14c8c82b32c22c&ipo=images", 
@@ -493,7 +493,7 @@
             },
             { 
                 name: "Sodium", 
-                desc: "Главный мод для оптимизации: повышает FPS и убирает микро-фризы. Замена графического движка.", 
+                desc: "Главный мод для оптимизации: повышает FPS и убирает микро-фризы.", 
                 url: "https://cdn.modrinth.com/data/AANobbMI/versions/g6ju16VJ/sodium-fabric-0.9.3-beta.1%2Bmc26.3.jar", 
                 modrinthUrl: "https://modrinth.com/mod/sodium",
                 icon: "https://cdn.modrinth.com/data/AANobbMI/295862f4724dc3f78df3447ad6072b2dcd3ef0c9_96.webp", 
@@ -533,7 +533,7 @@
             },
             { 
                 name: "Flashback", 
-                desc: "Записывайте игровой процесс сохроняй докозательства в свою пользу.", 
+                desc: "Записывай игровой процесс - сохроняй докозательства в свою пользу.", 
                 url: "https://cdn.modrinth.com/data/4das1Fjq/versions/cV1pa0YV/Flashback-0.43.6-for-MC26.3.jar?mr_download_reason=standalone&mr_loader=fabric", 
                 modrinthUrl: "https://modrinth.com/mod/flashback",
                 icon: "https://cdn.modrinth.com/data/4das1Fjq/e81c66aacf2e12c09a95e4f971ea5e2b9f608317_96.webp", 

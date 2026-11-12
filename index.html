@@ -49,16 +49,92 @@
         .container { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
 
         /* Стекло */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(8px) saturate(130%);
-            -webkit-backdrop-filter: blur(8px) saturate(130%);
-            border: 1px solid var(--glass-border);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6), 6px 6px 0px rgba(0,0,0,0.5);
-            padding: 32px;
-        }
+  /* ===== Стекло — «настоящее» ===== */
+.glass {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 32px;
+    border-radius: 20px;
+
+    /* Фон: лёгкий градиент имитирует неравномерную толщину стекла */
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.04) 40%,
+        rgba(255, 255, 255, 0.08) 100%
+    );
+
+    /* Многослойное размытие + усиление цвета и яркости */
+    backdrop-filter: blur(20px) saturate(180%) brightness(1.08) contrast(1.05);
+    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.08) contrast(1.05);
+
+    /* Границы: верх/лево светлее — туда падает свет */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    border-left: 1px solid rgba(255, 255, 255, 0.22);
+
+    /* Тени: внешние + внутренние блики/тени = объём и толщина */
+    box-shadow:
+        0 20px 50px -20px rgba(0, 0, 0, 0.7),
+        0 4px 12px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 1px 0 0 rgba(255, 255, 255, 0.15),
+        inset 0 -20px 30px -25px rgba(0, 0, 0, 0.4),
+        inset 0 20px 40px -30px rgba(255, 255, 255, 0.4);
+}
+
+/* Текстура «замороженного» стекла (шум) */
+.glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Диагональный блик-«зайчик» + анимация переливания */
+.glass::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 60%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.18),
+        transparent
+    );
+    animation: glass-shine 6s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+@keyframes glass-shine {
+    0%   { transform: translateX(-150%) rotate(15deg); }
+    100% { transform: translateX(300%)  rotate(15deg); }
+}
+
+/* Fallback для браузеров без backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+    .glass {
+        background: rgba(20, 20, 25, 0.75);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
+/* Уважение к prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .glass::after { animation: none; }
+}
 
         /* Шапка */
         .header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }

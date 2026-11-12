@@ -47,37 +47,59 @@
         }
 
         .container { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-
-     /* ===== 100% Apple Style (Stolen from apple.com) ===== */
+/* ===== Настоящее стекло iOS (Liquid Glass) ===== */
 .glass {
     position: relative;
+    isolation: isolate;
+    overflow: hidden;
     padding: 32px;
-    border-radius: 18px; /* У Apple скругления обычно 18px */
+    border-radius: 28px; /* В iOS скругления довольно большие */
 
-    /* ВАЖНО: Apple использует довольно плотный фон (0.72), 
-       чтобы текст был идеально читаемым, а не прозрачным */
-    background-color: rgba(22, 22, 23, 0.72); 
+    /* 1. Тонировка (Tint): легкий белый или темный налет, чтобы это было "материалом" */
+    background: rgba(255, 255, 255, 0.10);
 
-    /* Фирменный фильтр Apple. Они всегда ставят saturate ПЕРЕД blur */
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    /* 2. Матовость (Frost): Размытие + высокая насыщенность (saturate) + яркость.
+       Именно saturate(180%) дает тот самый "сочный" эффект iOS, когда цвета 
+       под стеклом не сереют, а становятся ярче. */
+    backdrop-filter: blur(8px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(8px) saturate(180%) brightness(1.1);
 
-    /* Очень тонкая, почти незаметная рамка */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    
-    /* Тень, которую Apple использует для всплывающих окон (macOS) */
+    /* 3. Кромка (Specular rim): Имитация толщины стекла.
+       Свет падает сверху, поэтому верхняя грань самая яркая. */
+    border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 
-        0 11px 34px 0 rgba(0, 0, 0, 0.36),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Легкий блик сверху */
+        /* Внешняя мягкая тень (отрыв от поверхности) */
+        0 8px 32px rgba(0, 0, 0, 0.25),
+        /* Верхний блик (самый сильный) */
+        inset 0 1px 1px rgba(255, 255, 255, 0.55),
+        /* Нижний отраженный свет */
+        inset 0 -1px 1px rgba(255, 255, 255, 0.30),
+        /* Боковые грани */
+        inset 1px 0 1px rgba(255, 255, 255, 0.20),
+        inset -1px 0 1px rgba(255, 255, 255, 0.20);
 }
 
-/* Если нужен светлый вариант (как в iOS) */
-.glass-light {
-    background-color: rgba(255, 255, 255, 0.72);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 0 11px 34px 0 rgba(0, 0, 0, 0.1);
+/* 4. Глянцевый отблеск (Sheen): Диагональный блик, который делает поверхность "влажной" */
+.glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.06) 100%
+    );
+    mix-blend-mode: overlay; /* Смешивает блик с фоном, делая его реалистичным */
+}
+
+/* Fallback для браузеров без поддержки backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+    .glass {
+        background: rgba(30, 30, 35, 0.85);
+    }
 }
         /* Шапка */
         .header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
